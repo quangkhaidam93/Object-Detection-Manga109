@@ -83,7 +83,7 @@ def create_model(n_classes, n_authors, args):
   
   elif args.model == "ssd":
     # create SSD300 model with VGG-16 backbone
-    model = create_ssd300(n_classes)
+    model = create_ssd300(n_classes, args)
     
   return model
 
