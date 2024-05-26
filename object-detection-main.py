@@ -184,6 +184,18 @@ def main(args):
   NUM_CLASSES=len(CLASSES)
 
   if args.mode == 2:
+    # Copy from train
+    file_path = "autori.txt"
+    data = pd.read_csv(file_path, sep="\t", header=None)
+    data.columns = ["id", "author", "title"]
+    ids = data["id"].tolist()
+    authors = data["author"].tolist()
+    titles = data["title"].tolist()
+
+    AUTHORS = authors.copy()
+    AUTHORS.insert(0, "background")
+    NUM_AUTHORS = len(AUTHORS)
+
     # inference mode
     inference_model = load_inference_model(os.path.join(args.checkpoint_path, args.file_name), DEVICE, NUM_CLASSES, NUM_AUTHORS, args)
     get_prediction(inference_model = inference_model, classes = CLASSES, args = args)
