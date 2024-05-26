@@ -50,6 +50,7 @@ def load_images(inference_path):
       if ext in types:
         img_path = os.path.join(root, file)
         paths.append(img_path)
+  print(paths)
   return paths
   
 def get_prediction(inference_model, classes, args):
