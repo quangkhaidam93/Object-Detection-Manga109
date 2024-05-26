@@ -185,7 +185,7 @@ def main(args):
 
   if args.mode == 2:
     # inference mode
-    inference_model = load_inference_model(args.file_name, DEVICE)
+    inference_model = load_inference_model(os.path.join(args.checkpoint_path, args.file_name), DEVICE, NUM_CLASSES, NUM_AUTHORS, args)
     get_prediction(inference_model = inference_model, classes = CLASSES, args = args)
   else:
 

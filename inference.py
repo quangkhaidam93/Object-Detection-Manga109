@@ -6,6 +6,7 @@ from datasetManga109 import pil_loader
 from torchvision.transforms import functional as F
 import torchvision.transforms as transforms
 import numpy as np
+import model
 
 def load_image_tensor(image_paths, device):
   """
@@ -23,9 +24,10 @@ def load_image_tensor(image_paths, device):
     input_images.append(image_tensor.to(device))
   return input_images
 
-def load_inference_model(model_path, device):
-  model = torch.load(model_path, map_location = torch.device(device))
-  return model
+def load_inference_model(model_path, device, n_classes, n_authors, args):
+  inference_model = model.create_model(n_classes, n_authors, args).to(device)
+  inference_model.load_state_dict(torch.load(model_path, map_location = torch.device(device)))
+  return inference_model
 
 def get_results(detector, images):
   with torch.no_grad():
